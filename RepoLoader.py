@@ -50,8 +50,8 @@ with col2:
                     NAME = tag.text.strip()
 
                 # total number of repo
-                repo_class = data.find_all(class_="wb-break-all")
-                TOTAL_REPO = len(repo_class)
+                repo_class = data.find(class_="Counter")
+                TOTAL_REPO = repo_class.text
 
                 st.text("")
 
@@ -73,9 +73,10 @@ with col2:
                 Repo = []
                 url1 = []
 
+                repo_class = data.find_all(class_="wb-break-all")
                 for _, i in enumerate(repo_class):
                     # To get link and add it with base url
-                    for a in i.findAll("a"):
+                    for a in i.find_all('a', href=True):
                         new_Url = base_url + a["href"]
 
                     project_name = i.text.strip("\nPublic")
