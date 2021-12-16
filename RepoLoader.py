@@ -31,7 +31,7 @@ with col2:
     if load_button:
 
         # ! IF INPUT FIELD IS EMPTY SHOW ERROR
-        if not USERNAME:
+        if not USERNAME or '/' in USERNAME or '?' in USERNAME:
             st.markdown(
                 "<h4 style='text-align: center; color:#FF4848;'>  Invalid username </h4>",
                 unsafe_allow_html=True,
@@ -55,6 +55,7 @@ with col2:
 
             # ^ IF success status 200 OK
             if get_url.status_code == 200:
+
                 data = BeautifulSoup(get_url.text, "html.parser")
 
                 # name of the Repo owner
@@ -168,7 +169,7 @@ with col2:
                         )
                     )
 
-                    st.plotly_chart(fig)
+                    st.plotly_chart(fig, use_container_width=True)
 
             #! ELSE PRINT ERROR FOR STATUS CODE 404
             else:
